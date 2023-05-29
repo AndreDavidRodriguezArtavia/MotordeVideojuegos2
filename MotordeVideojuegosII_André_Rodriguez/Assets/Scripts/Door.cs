@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public float openHeight = 5f;
+    public float openHight = 5f;
     public float openSpeed = 2f;
     private Vector3 initialPosition;
     private Vector3 targetPosition;
@@ -13,52 +13,54 @@ public class Door : MonoBehaviour
     private void Start()
     {
         initialPosition = transform.position;
-        targetPosition = initialPosition + new Vector3(0f, openHeight, 0f);
+        targetPosition = initialPosition + new Vector3(0f, openHight, 0f);
+        
     }
 
-    private IEnumerable OpenDoorCoroutine()
+    private IEnumerator OpenDoorCoroutine()
     {
-        float elapsedTime = 0f;
-        while (elapsedTime < openSpeed)
+        float elapsedtime = 0f;
+        while (elapsedtime < openSpeed)
         {
-            float t = elapsedTime / openSpeed;
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
-            elapsedTime += Time.deltaTime;
+            float t = elapsedtime / openSpeed;
+            transform.position = Vector3.Lerp(transform.position, targetPosition, t);
+            elapsedtime += Time.deltaTime;
             yield return null;
         }
+
         transform.position = targetPosition;
     }
 
-    private IEnumerable CloseDoorCoroutine()
+    private IEnumerator CloseDoorCoroutine()
     {
-        float elapsedTime = 0f;
-        while (elapsedTime < openSpeed)
+        float elapsedtime = 0f;
+        while (elapsedtime < openSpeed)
         {
-            float t = elapsedTime / openSpeed;
-            transform.position = Vector3.Lerp(targetPosition, initialPosition, t);
-            elapsedTime += Time.deltaTime;
+            float t = elapsedtime / openSpeed;
+            transform.position = Vector3.Lerp(transform.position, initialPosition, t);
+            elapsedtime += Time.deltaTime;
             yield return null;
         }
-        transform.position = initialPosition;
+
+        transform.position = targetPosition;
     }
 
     public void OpenDoor()
     {
-        if (!isOpen)
-        {
-            isOpen = true;
-            StopAllCoroutines();
-            StartCoroutine((string)OpenDoorCoroutine());
-            
-        }
+        isOpen = true;
+        StopAllCoroutines();
+        StartCoroutine(OpenDoorCoroutine());
     }
+
     public void CloseDoor()
     {
-        if (!isOpen)
+        if (isOpen)
         {
-            isOpen = true;
+            isOpen = false;
             StopAllCoroutines();
-            StartCoroutine((string)CloseDoorCoroutine());
+            StartCoroutine(CloseDoorCoroutine());
+
         }
     }
+
 }

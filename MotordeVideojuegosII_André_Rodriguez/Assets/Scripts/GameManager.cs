@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
+    public DoorOpener doorOpener;
 
     public static GameManager Instance
     {
@@ -18,17 +19,17 @@ public class GameManager : MonoBehaviour
                     GameObject manager = new GameObject("GameManager");
                     instance = manager.AddComponent<GameManager>();
                 }
-                
             }
             return instance;
         }
     }
 
-    private Door currentDoor;
+    public Door currentDoor;
 
     public void RegistercurrentDoor(Door door)
     {
         currentDoor = door;
+        doorOpener.RegisterDoor(door);
     }
 
     public void UnregistercurrentDoor()
@@ -38,15 +39,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if ( instance == null)
-        {
+      if (instance == null)
+      {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
+      }
+      else
+      {
             Destroy(gameObject);
-        }
+      }
     }
+
 
 }

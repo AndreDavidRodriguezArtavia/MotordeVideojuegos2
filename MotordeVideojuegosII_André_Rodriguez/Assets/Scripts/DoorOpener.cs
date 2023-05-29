@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoorOpener : MonoBehaviour
 {
     private List<Door> doors = new List<Door>();
-    private Door currentDoor;
+    public Door currentDoor;
 
     public void RegisterDoor(Door door)
     {
@@ -19,8 +19,11 @@ public class DoorOpener : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(GameManager.Instance.cur)
-        if(GameManager.Instance.cur)
+        if (GameManager.Instance.currentDoor != null)
+        {
+            SetCurrentDoor(GameManager.Instance.currentDoor);
+        }
+
         if (other.CompareTag("Player"))
         {
             foreach (Door door in doors)
@@ -30,10 +33,6 @@ public class DoorOpener : MonoBehaviour
                     door.CloseDoor();
                 }
             }
-            /*if (currentDoor != null)
-            {
-                currentDoor.OpenDoor();
-            }*/
         }
     }
 
@@ -49,7 +48,7 @@ public class DoorOpener : MonoBehaviour
         }
     }
 
-    public void setCurrentDoor(Door door)
+    public void SetCurrentDoor(Door door)
     {
         currentDoor = door;
     }
