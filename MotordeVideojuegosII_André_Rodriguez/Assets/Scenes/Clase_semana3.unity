@@ -534,20 +534,20 @@ MonoBehaviour:
   prefabBullet: {fileID: 9168609420931254040, guid: 44ab03e91bcb8cb4ea45e1a18054a123, type: 3}
   arsenal:
   - Type: 0
-    power: 15
+    power: 12.6
     bulletPerBurst: 1
     repetionAmount: 1
-    bulletLifeTime: 1
+    bulletLifeTime: 1.27
   - Type: 1
-    power: 15
-    bulletPerBurst: 5
+    power: 36.9
+    bulletPerBurst: 4
     repetionAmount: 1
-    bulletLifeTime: 0.5
-  - Type: 1
-    power: 30
-    bulletPerBurst: 1
-    repetionAmount: 5
-    bulletLifeTime: 1.5
+    bulletLifeTime: 0.82
+  - Type: 2
+    power: 8.2
+    bulletPerBurst: 2
+    repetionAmount: 3
+    bulletLifeTime: 1.55
 --- !u!1 &1841405659
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 1910744483}
   - component: {fileID: 1910744488}
   m_Layer: 0
-  m_Name: ObjectoDestruible
+  m_Name: DestrutacbleRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -772,7 +772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910744482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.74, y: 0.964, z: 10.06}
+  m_LocalPosition: {x: 13.59, y: 0.964, z: 12.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public float speed;
     private Vector3 direction;
     public float bulletLifeTime;
-
+    
     public void SetDirection(Vector3 newDirection)
     {
         direction = newDirection;
@@ -33,4 +33,5 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
 }

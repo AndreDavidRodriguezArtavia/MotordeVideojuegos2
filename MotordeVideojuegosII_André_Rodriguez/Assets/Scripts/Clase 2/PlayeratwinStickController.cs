@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Tag que se crean
+
+public enum BulletType
+{
+    Red,
+    Blue,
+    Green
+}
 public enum WeaponType
 {
     PISTOL,
@@ -28,30 +35,34 @@ public class PlayeratwinStickController : MonoBehaviour
 
     private Weapon currentWeapon;
     [SerializeField] private Transform shootingPoint;
-    [SerializeField] private GameObject prefabBullet;
+    [SerializeField] private GameObject[] prefabBullets = new GameObject[0];
 
     private bool canShoot = true;
 
     [SerializeField] private Weapon[] arsenal;
+    private int currentBullet = 0;
+
+ 
+   
 
     private void Start()
     {
         _mainCamera = Camera.main;
+        
 
         if(arsenal.Length > 0)
         {
             currentWeapon = arsenal[0];
         }     
-
-
-
     }
 
     private void Update()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        
 
+        
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         transform.position += movement * speed * Time.deltaTime;
 
@@ -74,6 +85,7 @@ public class PlayeratwinStickController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            
             currentWeapon = arsenal[0];
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -83,6 +95,17 @@ public class PlayeratwinStickController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             currentWeapon = arsenal[2];
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            currentBullet++;
+
+            if (currentBullet >= prefabBullets.Length)
+            {
+                currentBullet = 0;
+            }
+            
         }
     }
 
@@ -101,9 +124,9 @@ public class PlayeratwinStickController : MonoBehaviour
         float maxSpreadAngle = 45.0f;
         for (int i = 0; i < currentWeapon.bulletPerBurst; i++)
         {
-            GameObject bullet = Instantiate(prefabBullet, shootingPoint.position, Quaternion.identity);
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
-            bulletScript.speed = currentWeapon.power;
+            GameObject bullet = Instantiate(prefabBullets[currentBullet], shootingPoint.position, Quaternion.identity);
+            Bullets bulletScript = bullet.GetComponent<Bullets>();
+            bulletScript.bulletsSpeed = currentWeapon.power;
 
             if (currentWeapon.bulletPerBurst > 1)
             {
@@ -117,7 +140,7 @@ public class PlayeratwinStickController : MonoBehaviour
                 bulletScript.SetDirection(bulletDirection);
             }
 
-            bulletScript.bulletLifeTime = currentWeapon.bulletLifeTime;
+            bulletScript.bulletsLifeTime = currentWeapon.bulletLifeTime;
         }
         yield return new WaitForSeconds(0.1f);
     }
