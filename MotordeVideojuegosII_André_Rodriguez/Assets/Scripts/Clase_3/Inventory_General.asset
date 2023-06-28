@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df80c633e6f256a48b509856e9d1029c, type: 3}
   m_Name: Inventory_General
   m_EditorClassIdentifier: 
-  items: []
+  itemsKeyObject:
+  - KeyObject: {fileID: 11400000, guid: 60924c84992b479459b976f92b9f78a0, type: 2}
+    quantityKeyObject: 4
+  - KeyObject: {fileID: 11400000, guid: abc9a349b9c588c4fba85b6ec9ec8895, type: 2}
+    quantityKeyObject: 4
+  - KeyObject: {fileID: 11400000, guid: a7d1443baa5572348be3f87398be4538, type: 2}
+    quantityKeyObject: 2

@@ -7,12 +7,26 @@ using System;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory")]
 public class Inventory : ScriptableObject
 {
-    public List<ItemStack> items = new List<ItemStack>();
+    public List<ItemStackKeyObject> itemsKeyObject = new List<ItemStackKeyObject>();
+    public List<ItemStackFood> itemsFoods = new List<ItemStackFood>();
+    public List<ItemStackGun> itemsGuns = new List<ItemStackGun>();
 }
 
 [Serializable]
-public class ItemStack
+public class ItemStackKeyObject
 {
-    public Item item;
-    public int quantity;
+    public Item KeyObject;
+    public int quantityKeyObject;
+    
+}
+public class ItemStackFood
+{
+    public Item Food;
+    public int quantityFood;
+}
+
+public class ItemStackGun
+{
+    public Item Gun;
+    public int quantityGun;
 }

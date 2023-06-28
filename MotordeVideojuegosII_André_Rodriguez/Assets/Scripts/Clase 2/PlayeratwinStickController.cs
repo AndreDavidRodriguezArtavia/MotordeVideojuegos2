@@ -107,6 +107,7 @@ public class PlayeratwinStickController : MonoBehaviour
             }
             
         }
+        
     }
 
     private IEnumerator Shoot()
