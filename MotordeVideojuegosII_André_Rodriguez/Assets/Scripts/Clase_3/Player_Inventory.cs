@@ -13,7 +13,13 @@ public class Player_Inventory : MonoBehaviour
         Collectable_Item.Oncollected += CollectItemGun;
     }
 
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            UseFood();
+        }
+    }
 
     private void OnDestroy()
     {
@@ -72,6 +78,21 @@ public class Player_Inventory : MonoBehaviour
         else
         {
             inventory.itemsGuns.Add(new ItemStackGun { Gun = item, quantityGun = 1 });
+        }
+    }
+
+    private void UseFood()
+    {
+        if (inventory.itemsFoods.Count > 0)
+        {
+            ItemStackFood foodStack = inventory.itemsFoods[0];
+
+            foodStack.quantityFood--;
+
+            if (foodStack.quantityFood <= 0)
+            {
+                inventory.itemsFoods.RemoveAt(0);
+            }
         }
     }
 }

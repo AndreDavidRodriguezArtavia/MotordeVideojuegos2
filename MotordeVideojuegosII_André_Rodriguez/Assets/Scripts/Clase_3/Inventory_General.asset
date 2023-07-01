@@ -18,4 +18,4 @@ MonoBehaviour:
   - KeyObject: {fileID: 11400000, guid: abc9a349b9c588c4fba85b6ec9ec8895, type: 2}
     quantityKeyObject: 4
   - KeyObject: {fileID: 11400000, guid: a7d1443baa5572348be3f87398be4538, type: 2}
-    quantityKeyObject: 2
+    quantityKeyObject: 4
