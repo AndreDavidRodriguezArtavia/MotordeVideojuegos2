@@ -12,10 +12,12 @@ public class Enemigo : MonoBehaviour
     public Transform enemy;
     public GameObject prefabChest;
 
+
     private void Start()
     {
         tower = GameObject.FindObjectOfType<Torre>().transform;
     }
+ 
 
     private void Update()
     {
@@ -25,13 +27,16 @@ public class Enemigo : MonoBehaviour
 
     public void RecibirDano(int dano)
     {
+        instanciate random = GetComponent<instanciate>();
         salud -= dano;
         if(salud <= 0)
         {
             Morir();
+
+            random.InstantiateObjects();
             
-            Instantiate(prefabExperience, enemy.position, Quaternion.identity);
-            Instantiate(prefabChest, enemy.position, Quaternion.identity);
+            /*Instantiate(prefabExperience, enemy.position, Quaternion.identity);
+            Instantiate(prefabChest, enemy.position, Quaternion.identity);*/
         }
     }
 
