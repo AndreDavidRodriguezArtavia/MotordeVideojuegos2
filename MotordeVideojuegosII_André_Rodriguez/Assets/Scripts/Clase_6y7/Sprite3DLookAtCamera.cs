@@ -7,17 +7,14 @@ public class Sprite3DLookAtCamera : MonoBehaviour
     private Camera mainCamera;
     private SpriteRenderer spriteRenderer;
     private Transform player;
-
-    public Color colorNorte;
-    public Color colorSur;
-    public Color colorEste;
-    public Color colorOeste;
+    private Vector3 lastPlayerDirection;
 
     private void Start()
     {
         mainCamera = Camera.main;
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GetComponentInParent<Transform>();
+        lastPlayerDirection = Vector3.forward;
     }
 
     private void Update()
@@ -28,35 +25,27 @@ public class Sprite3DLookAtCamera : MonoBehaviour
     private void RotateSprite()
     {
         Vector3 playerDirection = player.transform.forward;
-        playerDirection.y = 0;
-        float playerRotation = Mathf.Atan2(playerDirection.x, playerDirection.z) * Mathf.Rad2Deg;
+        float playerRotation;
 
         if (player.GetComponentInParent<Player2_5DController>().IsMoving == true)
         {
             playerDirection = player.GetComponentInParent<Player2_5DController>().GetMovementDirection();
-            playerRotation = Vector3.Angle(playerDirection, mainCamera.transform.forward);
+            lastPlayerDirection = playerDirection;
 
-            Vector3 cross = Vector3.Cross(playerDirection, mainCamera.transform.forward);
-            if (cross.y < 0)
-            {
-                playerRotation = -playerRotation;
-            }
-        }
-        if(playerRotation > 45f && playerRotation <= 135f)
-        {
-            spriteRenderer.color = colorEste;
-        } else if (playerRotation > 135f || playerRotation <= -135f)
-        {
-            spriteRenderer.color = colorSur;
-        }
-        else if (playerRotation > -135f && playerRotation <= -145f)
-        {
-            spriteRenderer.color = colorOeste;
+
         }
         else
         {
-            spriteRenderer.color = colorNorte;
+            playerDirection = lastPlayerDirection;
         }
+
+        Vector3 relativeDr = mainCamera.transform.InverseTransformDirection(playerDirection);
+        playerRotation = Mathf.Atan2(relativeDr.x, relativeDr.z) * Mathf.Rad2Deg;
+
+        playerRotation += 90f;
+        var animator = GetComponent<Animator>();
+        animator.SetFloat("DirectionX", -Mathf.Cos(playerRotation + Mathf.Rad2Deg));
+        animator.SetFloat("DirectionZ", Mathf.Sin(playerRotation + Mathf.Rad2Deg));
 
         transform.LookAt(transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
     }

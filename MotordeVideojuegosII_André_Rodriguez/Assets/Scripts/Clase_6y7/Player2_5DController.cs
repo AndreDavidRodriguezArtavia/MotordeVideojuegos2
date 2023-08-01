@@ -30,6 +30,9 @@ public class Player2_5DController : MonoBehaviour
 
         movement = camRight * Input.GetAxisRaw("Horizontal") + camForward * Input.GetAxisRaw("Vertical");
         movement = Quaternion.Euler(0, cameraRotationDifference, 0) * movement;
+
+        var animator = GetComponentInChildren<Animator>();
+        animator.SetFloat("Magnitud", movement.magnitude);
     }
 
     private void FixedUpdate()
